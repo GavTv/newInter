@@ -62,21 +62,21 @@ MH.forEach((h, i) => {
 
 /* ── Gallery strip ──────────────────────────────────── */
 const GALLERY = [
-  { src: "https://cdn.cosmos.so/dcec6266-f8c7-4810-ac99-695dc8b9e773?format=jpeg" },
-  { src: "https://cdn.cosmos.so/b97b4bf8-3ac3-43d9-a99b-2115cf564507?format=jpeg" },
-  { src: "https://cdn.cosmos.so/c1d6e80c-58e2-4166-abf6-af034bcf0e89?format=jpeg" },
-  { src: "https://cdn.cosmos.so/1a81f94d-b922-4694-826e-f7088a8ec791?format=jpeg" },
-  { src: "https://cdn.cosmos.so/6a03af1b-2ba3-4d04-adb7-5d3e04da147d?format=jpeg" },
-  { src: "https://cdn.cosmos.so/ae033a50-d2e2-40af-b60f-efc748cf44a6?format=jpeg" },
-  { src: "https://cdn.cosmos.so/6f8eeac7-36ad-4b90-b676-5fde27111268?format=jpeg" },
-  { src: "https://cdn.cosmos.so/7ded77c0-a780-4f28-8a4e-6c5069b60e5a?format=jpeg" },
-  { src: "https://cdn.cosmos.so/54f55f00-9438-4129-afad-bb2dd12c1904?format=jpeg" },
+  { src: "images/hero-1.jpg" },
+  { src: "images/hero-4.jpg" },
+  { src: "images/hero-2.jpg" },
+  { src: "images/chapter-me-1.jpg" },
+  { src: "images/hero-3.jpg" },
+  { src: "images/gallery-6.jpg" },
+  { src: "images/gallery-7.jpg" },
+  { src: "images/chapter-mother.jpg" },
+  { src: "images/chapter-me-2.jpg" },
 ];
 const row = document.getElementById("gallery-row");
 GALLERY.forEach((g) => {
   const item = document.createElement("div");
   item.className = "gal-item";
-  item.innerHTML = `<img src="${g.src}" alt="" loading="lazy"><div class="gal-caption">// cosmos.so</div>`;
+  item.innerHTML = `<img src="${g.src}" alt="" loading="lazy"><div class="gal-caption">// local</div>`;
   row.appendChild(item);
 });
 
