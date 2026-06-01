@@ -120,3 +120,38 @@ window.addEventListener(
   },
   { passive: true }
 );
+
+/* ── Touch: tap ≈ hover on interactive blocks ─────── */
+const touchUI = window.matchMedia("(hover: none), (pointer: coarse)");
+const touchSelectors =
+  ".photo-frame, .book, .mbook, .gal-item, .thread-img, .tnode-dot, .epi-card, .motto";
+
+function bindTouchFeedback() {
+  document.querySelectorAll(touchSelectors).forEach((el) => {
+    el.addEventListener(
+      "touchstart",
+      () => el.classList.add("is-touch"),
+      { passive: true }
+    );
+    const end = () => el.classList.remove("is-touch");
+    el.addEventListener("touchend", end, { passive: true });
+    el.addEventListener("touchcancel", end, { passive: true });
+  });
+
+  const videoBreak = document.getElementById("video-break");
+  if (videoBreak) {
+    videoBreak.addEventListener(
+      "touchstart",
+      () => videoBreak.classList.add("is-touch"),
+      { passive: true }
+    );
+    const end = () => videoBreak.classList.remove("is-touch");
+    videoBreak.addEventListener("touchend", end, { passive: true });
+    videoBreak.addEventListener("touchcancel", end, { passive: true });
+  }
+}
+
+if (touchUI.matches) bindTouchFeedback();
+touchUI.addEventListener("change", (e) => {
+  if (e.matches) bindTouchFeedback();
+});

@@ -18,11 +18,23 @@
     transition: grid 300ms ease-in-out;
     counter-reset: --card-counter;
 		
-    /* define grid columns according to which one has hover */
-    &:has(:nth-child(1):hover){ --grid-cols: 6fr 1fr 1fr  1fr 1fr 1fr  1fr 1fr 1fr; }
-    &:has(:nth-child(2):hover){ --grid-cols: 1fr 1fr 1fr  6fr 1fr 1fr  1fr 1fr 1fr; }
-    &:has(:nth-child(3):hover){ --grid-cols: 1fr 1fr 1fr  1fr 1fr 6fr  1fr 1fr 1fr; }
-    &:has(:nth-child(4):hover){ --grid-cols: 1fr 1fr 1fr  1fr 1fr 1fr  1fr 6fr 1fr; }
+    /* define grid columns according to which one has hover / tap */
+    &:has(:nth-child(1):hover),
+    &:has(:nth-child(1).is-active) {
+      --grid-cols: 6fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    &:has(:nth-child(2):hover),
+    &:has(:nth-child(2).is-active) {
+      --grid-cols: 1fr 1fr 1fr 6fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    &:has(:nth-child(3):hover),
+    &:has(:nth-child(3).is-active) {
+      --grid-cols: 1fr 1fr 1fr 1fr 1fr 6fr 1fr 1fr 1fr;
+    }
+    &:has(:nth-child(4):hover),
+    &:has(:nth-child(4).is-active) {
+      --grid-cols: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 6fr 1fr;
+    }
    
     
     & > *{
@@ -39,9 +51,11 @@
       background-image: var(--bg-img);
       background-size: 450px 100%; /* requires fixed width to maintain size and aspect */
       
-			/* remove notch from current and next sibling on hover*/
+			/* remove notch from current and next sibling on hover / tap */
       &:hover,
-      &:hover + div{
+      &:hover + div,
+      &.is-active,
+      &.is-active + div {
         border-radius: 0 0 0 0;
       }
     	/* define grid position - each element overlaps by 1 column */
@@ -64,9 +78,39 @@
        transition: scale 150ms ease-in-out;
       scale: 0;
      }
-      &:hover::after{
+      &:hover::after,
+      &.is-active::after {
         scale: 1;
       }
+    }
+  }
+}
+
+/* touch: same layout, better image fit */
+@media (hover: none), (pointer: coarse) {
+  @layer demo {
+    .wrapper > * {
+      background-size: cover;
+      background-position: center;
+      touch-action: manipulation;
+    }
+  }
+
+  @layer base {
+    body {
+      padding: max(0.75rem, env(safe-area-inset-top))
+        max(0.75rem, env(safe-area-inset-right))
+        max(0.75rem, env(safe-area-inset-bottom))
+        max(0.75rem, env(safe-area-inset-left));
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  @layer demo {
+    .wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1;
     }
   }
 }

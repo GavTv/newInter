@@ -1292,3 +1292,74 @@ footer {
 .ft-credit {
   opacity: 0.4;
 }
+
+/* ── TOUCH: mirror hover effects on mobile ──────────── */
+@media (hover: none), (pointer: coarse) {
+  #cur {
+    display: none !important;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .photo-frame:active,
+  .photo-frame.is-touch {
+    transform: scale(1.04) rotate(0deg) !important;
+    box-shadow: 10px 10px 0 var(--ink);
+    z-index: 10;
+  }
+
+  .book:active,
+  .book.is-touch {
+    transform: translateX(8px) rotate(0.5deg);
+    z-index: 5;
+  }
+
+  .mbook:active,
+  .mbook.is-touch {
+    background: var(--yellow) !important;
+  }
+
+  .gal-item:active .gal-caption,
+  .gal-item.is-touch .gal-caption {
+    transform: none;
+  }
+
+  .gal-item:active,
+  .gal-item.is-touch {
+    transform: translateY(-6px);
+    box-shadow: 5px 11px 0 var(--yellow);
+  }
+
+  .thread-img:active img,
+  .thread-img.is-touch img {
+    transform: scale(1.04);
+    filter: saturate(1) brightness(1);
+  }
+
+  .tnode-dot:active,
+  .tnode-dot.is-touch {
+    background: rgba(255, 255, 255, 0.18);
+    transform: scale(1.1);
+  }
+
+  .epi-card:active,
+  .epi-card.is-touch {
+    transform: translate(-3px, -3px);
+    box-shadow: 6px 6px 0 var(--ink);
+    z-index: 2;
+  }
+
+  .motto:active,
+  .motto.is-touch {
+    background: var(--yellow) !important;
+    color: var(--ink) !important;
+    -webkit-text-stroke: 0 !important;
+  }
+
+  #video-break:hover #spotlight-canvas,
+  #video-break.is-touch #spotlight-canvas {
+    opacity: 1;
+  }
+}
