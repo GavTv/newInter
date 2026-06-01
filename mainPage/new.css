@@ -760,6 +760,93 @@ body.cur-click #cur {
 }
 
 /* ══════════════════════════════════════════════════════
+       SLIDE BANNER (between sections)
+    ══════════════════════════════════════════════════════ */
+.slide-banner {
+  background: var(--pink);
+  color: var(--ink);
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+  overflow: hidden;
+  padding: 0.85rem 0;
+}
+
+.slide-banner__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 2.5rem;
+  animation: slide-banner-scroll 18s linear infinite;
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 3vw, 1.75rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.slide-banner__btn {
+  padding: 0.35rem 1rem;
+  border: 3px solid var(--ink);
+  background: var(--yellow);
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slide-banner__btn:hover,
+.slide-banner__btn:focus-visible {
+  background: var(--blue);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+  outline: none;
+}
+
+.slide-banner__btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.slide-banner__sep {
+  color: var(--ink);
+  font-size: 1rem;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.slide-banner:hover .slide-banner__track {
+  animation-play-state: paused;
+}
+
+body:has(.slide-banner__btn:hover) #cur {
+  width: 16px;
+  height: 16px;
+  background: var(--pink);
+}
+
+@keyframes slide-banner-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide-banner__track {
+    animation: none;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+/* ══════════════════════════════════════════════════════
        VIDEO BREAK
     ══════════════════════════════════════════════════════ */
 #video-break {
