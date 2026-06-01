@@ -1,0 +1,12 @@
+{
+  "name": "second-page",
+  "private": true,
+  "scripts": {
+    "build": "esbuild second.ts --format=esm --outfile=second.js",
+    "watch": "esbuild second.ts --format=esm --outfile=second.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.0"
+  }
+}
