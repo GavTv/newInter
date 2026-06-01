@@ -8,6 +8,14 @@
 </head>
 <body>
   <p id="load-msg">loading…</p>
+  <script>
+    window.addEventListener("unhandledrejection", function () {
+      var el = document.getElementById("load-msg");
+      if (el && !document.body.classList.contains("is-ready")) {
+        el.textContent = "Не удалось загрузить 3D. Обнови страницу.";
+      }
+    });
+  </script>
   <script type="module" src="second.js"></script>
 </body>
 </html>

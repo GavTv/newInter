@@ -2,8 +2,11 @@
   "name": "second-page",
   "private": true,
   "scripts": {
-    "build": "esbuild second.ts --format=esm --outfile=second.js",
-    "watch": "esbuild second.ts --format=esm --outfile=second.js --watch"
+    "build": "esbuild second.ts --bundle --format=esm --target=es2020 --outfile=second.js",
+    "watch": "esbuild second.ts --bundle --format=esm --target=es2020 --outfile=second.js --watch"
+  },
+  "dependencies": {
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
