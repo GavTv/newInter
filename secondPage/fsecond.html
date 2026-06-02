@@ -4,10 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Hypercube</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&family=Unbounded:wght@200;400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="second.css">
 </head>
 <body>
+  <div id="hypercube-stage" aria-hidden="true"></div>
+
   <p id="load-msg">loading…</p>
+
+  <a class="story-back" href="../mainPage/new.html">← назад</a>
+
+  <main class="scroll-story" id="scroll-story">
+    <section class="story-spacer" aria-hidden="true"></section>
+
+    <section class="story-panel">
+      <p class="story-kicker">Давай посмотрим </p>
+      <h2 class="story-title">ЦВЕТ<br></h2>
+      <p class="story-body">Цветовая политра она всегда для наешго глаза меняется.</p>
+    </section>
+
+    <section class="story-panel">
+      <p class="story-kicker">✦ форма</p>
+      <h2 class="story-title">Наши<br>Ощущения</h2>
+      <p class="story-body">Нам кажется что мы видим совсем мало для нашего глаза</p>
+    </section>
+
+    <section class="story-panel">
+      <p class="story-kicker">✦ глубина</p>
+      <h2 class="story-title">БОЛЬШЕ<br>ОДНОГО<br>ИЗМЕРЕНИЯ</h2>
+      <p class="story-body">Плоская поверхность может вести вглубь. Краска умеет создавать объём, который чувствуешь, а не только видишь.</p>
+    </section>
+
+    <section class="story-panel story-panel--final">
+      <p class="story-kicker">✦ interpaints</p>
+      <h2 class="story-title">НЕ БОЙСЯ<br>БЫТЬ ЯРКИМ</h2>
+      <p class="story-body">Обычное — переоценено. Прокрути ещё раз или вернись на главную.</p>
+      <a class="story-cta" href="../mainPage/new.html">на главную →</a>
+    </section>
+
+    <section class="story-spacer story-spacer--end" aria-hidden="true"></section>
+  </main>
+
   <script>
     window.addEventListener("unhandledrejection", function () {
       var el = document.getElementById("load-msg");

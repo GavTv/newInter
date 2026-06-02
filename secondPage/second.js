@@ -19315,15 +19315,30 @@ if (typeof window !== "undefined") {
 // second.ts
 window.addEventListener("DOMContentLoaded", () => {
   try {
-    new Hypercube().init();
+    const stage = document.getElementById("hypercube-stage") ?? document.body;
+    new Hypercube(stage).init();
+    initScrollStory();
     document.body.classList.add("is-ready");
   } catch (err) {
     const el = document.getElementById("load-msg");
     if (el) el.textContent = "WebGL error: " + (err instanceof Error ? err.message : String(err));
   }
 });
+function initScrollStory() {
+  const panels = document.querySelectorAll(".story-panel");
+  if (!panels.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("is-visible");
+      });
+    },
+    { threshold: 0.4, rootMargin: "-12% 0px -12% 0px" }
+  );
+  panels.forEach((el) => io.observe(el));
+}
 var Hypercube = class {
-  constructor(container = document.body) {
+  constructor(container) {
     this.background = 0;
     this.foreground = 16777215;
     this.duration = 16e3;
@@ -19337,7 +19352,8 @@ var Hypercube = class {
     container.insertBefore(this.renderer.domElement, container.firstChild);
   }
   init() {
-    const particlesPerEdge = 200;
+    const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    const particlesPerEdge = coarse ? 100 : 200;
     const sizeOut = 1;
     const sizeIn = 0.5;
     const cubeEdges = [

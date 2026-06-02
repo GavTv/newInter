@@ -4,13 +4,31 @@ type CubeEdge = number[];
 
 window.addEventListener("DOMContentLoaded", () => {
 	try {
-		new Hypercube().init();
+		const stage = document.getElementById("hypercube-stage") ?? document.body;
+		new Hypercube(stage).init();
+		initScrollStory();
 		document.body.classList.add("is-ready");
 	} catch (err) {
 		const el = document.getElementById("load-msg");
 		if (el) el.textContent = "WebGL error: " + (err instanceof Error ? err.message : String(err));
 	}
 });
+
+function initScrollStory(): void {
+	const panels = document.querySelectorAll<HTMLElement>(".story-panel");
+	if (!panels.length) return;
+
+	const io = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((e) => {
+				if (e.isIntersecting) e.target.classList.add("is-visible");
+			});
+		},
+		{ threshold: 0.4, rootMargin: "-12% 0px -12% 0px" }
+	);
+
+	panels.forEach((el) => io.observe(el));
+}
 
 class Hypercube {
 	private readonly scene: THREE.Scene;
@@ -22,7 +40,7 @@ class Hypercube {
 	private tesseract?: THREE.Points;
 	private mat?: THREE.ShaderMaterial;
 
-	constructor(container: HTMLElement = document.body) {
+	constructor(container: HTMLElement) {
 		// Set up the scene
 		this.scene = new THREE.Scene();
 		this.scene.background = new THREE.Color(this.background);
@@ -38,7 +56,8 @@ class Hypercube {
 	}
 
 	public init(): void {
-		const particlesPerEdge: number = 200;
+		const coarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+		const particlesPerEdge: number = coarse ? 100 : 200;
 		const sizeOut: number = 1;
 		const sizeIn: number = 0.5;
 		const cubeEdges: CubeEdge[] = [
