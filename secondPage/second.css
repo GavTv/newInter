@@ -57,6 +57,9 @@ body.is-ready #load-msg {
   position: relative;
   z-index: 2;
   pointer-events: none;
+  --story-kicker: 0.7rem;
+  --story-title: 1.1rem;
+  --story-body: 0.9375rem;
 }
 
 body:not(.is-ready) .scroll-story {
@@ -66,6 +69,11 @@ body:not(.is-ready) .scroll-story {
 .story-spacer {
   min-height: 100vh;
   min-height: 100dvh;
+}
+
+.story-spacer--gap {
+  min-height: 50vh;
+  min-height: 50dvh;
 }
 
 .story-spacer--end {
@@ -89,18 +97,32 @@ body:not(.is-ready) .scroll-story {
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.story-panel--top {
+  justify-content: flex-start;
+  padding-top: clamp(5rem, 16vh, 9rem);
+  min-height: 85vh;
+  min-height: 85dvh;
+}
+
+.story-panel--higher {
+  padding-top: clamp(3.25rem, 7vh, 4.5rem);
+  min-height: 72vh;
+  min-height: 72dvh;
+  padding-bottom: clamp(2rem, 8vh, 4rem);
+}
+
 .story-panel.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.story-panel.is-visible .story-title {
+.story-panel.is-visible .story-title--hero {
   animation: title-in 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .story-kicker {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: 0.65rem;
+  font-size: var(--story-kicker);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #ffe600;
@@ -110,12 +132,12 @@ body:not(.is-ready) .scroll-story {
 
 .story-title {
   font-family: "Unbounded", system-ui, sans-serif;
-  font-weight: 900;
-  font-size: clamp(1.75rem, 8vw, 3.25rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  font-weight: 600;
+  font-size: var(--story-title);
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 1rem;
   text-shadow:
     0 2px 40px rgba(0, 0, 0, 0.95),
     0 0 80px rgba(0, 0, 0, 0.6);
@@ -123,10 +145,34 @@ body:not(.is-ready) .scroll-story {
 
 .story-body {
   font-family: "Syne", system-ui, sans-serif;
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  line-height: 1.55;
+  font-size: var(--story-body);
+  line-height: 1.5;
   color: rgba(245, 245, 245, 0.88);
   text-shadow: 0 1px 24px rgba(0, 0, 0, 0.95);
+}
+
+@media (max-width: 480px) {
+  .scroll-story {
+    --story-kicker: 0.65rem;
+    --story-title: 1rem;
+    --story-body: 0.85rem;
+  }
+
+  .story-kicker {
+    margin-bottom: 0.75rem;
+  }
+
+  .story-title {
+    line-height: 1.4;
+  }
+
+  .story-body {
+    line-height: 1.45;
+  }
+
+  .story-panel {
+    max-width: 100%;
+  }
 }
 
 .story-panel--final .story-cta {
@@ -197,7 +243,7 @@ body:not(.is-ready) .scroll-story {
     transition: none;
   }
 
-  .story-panel.is-visible .story-title {
+  .story-panel.is-visible .story-title--hero {
     animation: none;
   }
 }
