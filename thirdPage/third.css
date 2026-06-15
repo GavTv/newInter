@@ -1,0 +1,299 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0)
+    env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@font-face {
+  font-family: "Kwokwi";
+  src: url("assets/Kwokwi-Regular.woff2") format("woff2"),
+    url("assets/Kwokwi-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@property --ga {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+:root {
+  --rainbow: oklch(72% 0.33 12), oklch(78% 0.3 55), oklch(88% 0.26 100),
+    oklch(80% 0.3 155), oklch(72% 0.33 210), oklch(68% 0.32 270),
+    oklch(74% 0.34 320), oklch(72% 0.33 12);
+  --model-h: min(72vh, calc(88vw * 10 / 9));
+  --model-w: min(calc(72vh * 9 / 10), 88vw);
+  --frame-radius: clamp(16px, 4vw, 28px);
+  --inner-radius: clamp(12px, 3.5vw, 24px);
+  --title-size: clamp(2.5rem, 7.5vw, 5.75rem);
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  padding: 2vh 4vw 3vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vh, 1.5rem);
+}
+
+.model-wrap {
+  position: relative;
+  isolation: isolate;
+  width: var(--model-w);
+  height: var(--model-h);
+  padding: 3px;
+  border-radius: var(--frame-radius);
+  background: conic-gradient(from var(--ga), var(--rainbow));
+  animation: rainbow-spin 4s linear infinite;
+}
+
+.my_model {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--inner-radius);
+  overflow: hidden;
+  background: #000;
+}
+
+@keyframes rainbow-spin {
+  to {
+    --ga: 360deg;
+  }
+}
+
+.title {
+  font-size: var(--title-size);
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  font-family: "Kwokwi", sans-serif;
+  line-height: 1;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.title span {
+  color: var(--letter-color);
+}
+
+.badge {
+  position: absolute;
+  z-index: 2;
+  padding: clamp(5px, 1.2vw, 8px) clamp(8px, 2vw, 14px);
+  border: 1px solid currentColor;
+  font-size: clamp(11px, 2.8vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #d6ff00;
+  background: #050505;
+  transform: rotate(-10deg);
+  box-shadow: 3px 3px 0 #ff005d;
+  white-space: nowrap;
+}
+
+.badge-left {
+  left: clamp(-10px, -2vw, -20px);
+  top: 1.5vh;
+}
+
+.badge-right {
+  right: clamp(-10px, -2vw, -20px);
+  top: auto;
+  bottom: 4%;
+  color: #00d5ff;
+  transform: rotate(7deg);
+}
+
+.my_model::part(default-progress-bar) {
+  display: none;
+}
+
+.model-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  border-radius: var(--inner-radius);
+  overflow: hidden;
+  background: #000;
+}
+
+.model-loader__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  object-fit: cover;
+}
+
+.model-loader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+      circle at 50% 35%,
+      rgb(0 213 255 / 0.16),
+      transparent 36%
+    ),
+    linear-gradient(rgb(0 0 0 / 0.18), rgb(0 0 0 / 0.72));
+}
+
+.model-loader__content {
+  width: min(82%, 320px);
+  padding: clamp(12px, 3vw, 18px);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: clamp(12px, 3vw, 18px);
+  text-align: center;
+  color: #fff;
+  background: rgb(5 5 5 / 0.68);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 24px rgb(0 213 255 / 0.18), 4px 4px 0 #ff005d;
+}
+
+.model-loader__status {
+  margin-bottom: 6px;
+  font-size: clamp(14px, 3.5vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d6ff00;
+}
+
+.model-loader__text {
+  margin-bottom: 12px;
+  font-size: clamp(12px, 3vw, 14px);
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.78);
+}
+
+.model-loader__bar {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.16);
+}
+
+.model-loader__progress {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #16d3ff,
+    #10fb06,
+    #fbb202,
+    #fa3200,
+    #f61272
+  );
+  transition: width 0.2s ease;
+}
+
+.model-loader__percent {
+  margin-top: 6px;
+  font-size: clamp(11px, 2.8vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00d5ff;
+}
+
+.model-wrap.is-model-loaded .model-loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.model-wrap.has-model-error .model-loader__status {
+  color: #ff005d;
+}
+
+.model-wrap.has-model-error .model-loader__text {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --model-h: min(56vh, calc(86vw * 10 / 9));
+    --model-w: min(calc(56vh * 9 / 10), 86vw);
+    --title-size: clamp(2rem, 9.5vw, 3rem);
+  }
+
+  .wrapper {
+    padding: 1.5vh 5vw 2vh;
+    gap: 0.75rem;
+  }
+
+  .badge-left {
+    left: 0;
+  }
+
+  .badge-right {
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --model-h: min(50vh, calc(82vw * 10 / 9));
+    --model-w: min(calc(50vh * 9 / 10), 82vw);
+    --title-size: clamp(1.75rem, 9vw, 2.5rem);
+  }
+}
+
+@media (max-height: 700px) and (orientation: landscape) {
+  :root {
+    --model-h: min(74vh, calc(42vw * 10 / 9));
+    --model-w: min(calc(74vh * 9 / 10), 42vw);
+    --title-size: clamp(1.4rem, 5.5vh, 2.25rem);
+  }
+
+  .wrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    padding: 1vh 3vw;
+  }
+
+  .title {
+    flex: 0 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .model-wrap {
+    animation-duration: 8s;
+  }
+}

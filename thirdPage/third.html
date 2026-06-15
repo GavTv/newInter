@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>цвет и панк детка.</title>
+  <link rel="stylesheet" href="third.css">
+</head>
+<body>
+  <div class="wrapper">
+    <div class="model-wrap">
+      <model-viewer
+        class="my_model"
+        poster="assets/poster.webp"
+        alt="punk skull"
+        camera-controls
+        touch-action="pan-y"
+        shadow-intensity="1"
+        camera-orbit="116deg 90deg 105%"
+        field-of-view="34deg"
+        reveal="auto"
+      >
+        <div class="model-loader" slot="poster">
+          <img
+            class="model-loader__poster"
+            src="assets/poster.webp"
+            alt=""
+            aria-hidden="true"
+          >
+
+          <div class="model-loader__content">
+            <div class="model-loader__status" aria-live="polite">Жди меня</div>
+
+            <div class="model-loader__text">
+              Череп панка загружается. Подожди немного.
+            </div>
+
+            <div class="model-loader__bar" aria-hidden="true">
+              <span class="model-loader__progress"></span>
+            </div>
+
+            <div class="model-loader__percent">0%</div>
+          </div>
+        </div>
+      </model-viewer>
+
+      <span class="badge badge-left">Тут цвет</span>
+      <a class="badge badge-right" href="../fourPage/fourPage.html">Там цвет</a>
+    </div>
+
+    <h1 class="title"></h1>
+  </div>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <script src="third.js" defer></script>
+</body>
+</html>
